@@ -33,6 +33,7 @@ class UsersRequest extends FormRequest
                     'email' => 'unique:users|required',
                     'name' => 'required',
                     'address' => 'required',
+                    'phonenumber' => 'required|numeric|phone',
                     'password' => 'required|confirmed'
                 ];
             }
@@ -42,13 +43,14 @@ class UsersRequest extends FormRequest
             }
             case 'POST':
             {
-                return [
+               return [
                     'name' => 'required',
                     'username' => 'unique:users|required',
                     'email' => 'unique:users|required',
                     'name' => 'required',
                     'address' => 'required',
-                    'password' => 'required'
+                    'phonenumber' => 'required|numeric|phone',
+                    'password' => 'required|confirmed'
                 ];
             }
             case 'PUT':
