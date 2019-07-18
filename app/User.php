@@ -41,4 +41,9 @@ class User extends Authenticatable
     public function findForPassport($username){
         return $this->where('username', $username)->first();
     }
+
+    public function companies()
+    {
+        return $this->belongsToMany(Company::class);
+    }
 }
