@@ -22,6 +22,6 @@ class RoutesController extends Controller
         	$counter++;
         }
 
-        return $routes;
+        return array('routes' => $routes);
     }
 }
