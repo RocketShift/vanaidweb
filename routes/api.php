@@ -14,5 +14,6 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->post('/routes', 'RoutesController@list');
+Route::middleware('auth:api')->post('/vehicles', 'VehiclesController@list');
 
 Route::post('/register', 'UsersController@save');

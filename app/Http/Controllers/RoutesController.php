@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Routes;
-use App\User;
 
 class RoutesController extends Controller
 {
     public function list(Request $request){
-    	$user = User::where('username', $request->input('username'))->first();
+    	$user = $request->user();
     	$company = $user->companies()->first();
 
-    	$routes = Routes::where('company_id', $company->id)
-               ->orderBy('name', 'desc')
+    	$routes = $company->routes()
+               ->orderBy('name', 'asc')
                ->get();
 
         $counter = 0;
