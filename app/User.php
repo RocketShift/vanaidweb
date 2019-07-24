@@ -6,6 +6,8 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Company;
+use App\Session;
 
 class User extends Authenticatable
 {
@@ -42,8 +44,11 @@ class User extends Authenticatable
         return $this->where('username', $username)->first();
     }
 
-    public function companies()
-    {
+    public function companies(){
         return $this->belongsToMany(Company::class);
+    }
+
+    public function sessions(){
+        return $this->hasMany(Session::class);
     }
 }
