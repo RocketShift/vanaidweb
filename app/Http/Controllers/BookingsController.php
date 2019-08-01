@@ -29,7 +29,12 @@ class BookingsController extends Controller
 		    })->get();
 
     	foreach ($routes as $route) {
-    		return $route->municipalities;
+    		$municipalities = array();
+    		foreach ($route->municipalities as $municipality) {
+    			$municipalities[] = $municipality->municipality;
+    		}
+
+    		
     	}
 
     	return $routes;
