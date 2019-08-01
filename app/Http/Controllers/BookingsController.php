@@ -28,15 +28,23 @@ class BookingsController extends Controller
 	              	->whereRaw('route_municipalities.municipality = "'.request()->input('pickup_address').'"');
 		    })->get();
 
+        $selected_municipalities = array(request()->input('pickup_address'));
     	foreach ($routes as $route) {
     		$municipalities = array();
     		foreach ($route->municipalities as $municipality) {
     			$municipalities[] = $municipality->municipality;
     		}
 
-    		
+    		$base_index = array_search(request()->input('pickup_address'), $municipalities);
+            if(isset($municipalities[$base_index - 1]) && !in_array($municipalities[$base_index - 1], $selected_municipalities)){
+                $selected_municipalities[] = $municipalities[$base_index - 1];
+            }
+
+            if(isset($municipalities[$base_index + 1]) && !in_array($municipalities[$base_index + 1], $selected_municipalities)){
+                $selected_municipalities[] = $municipalities[$base_index + 1];
+            }
     	}
 
-    	return $routes;
+    	return $selected_municipalities;
     }
 }
