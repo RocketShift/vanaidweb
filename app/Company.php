@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Vehicle;
-use App\Routes;
+use App\Route;
 
 class Company extends Model
 {
@@ -18,7 +18,7 @@ class Company extends Model
     }
 
     public function routes(){
-        return $this->hasMany(Routes::class);
+        return $this->hasMany(Route::class);
     }
 
     public function vehicles(){
