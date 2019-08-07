@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use App\Route;
 use App\Booking;
 use App\RouteMunicipality;
+use App\Device;
 use Illuminate\Support\Facades\DB;
 
 class BookingsController extends Controller
 {
     public function find(){
+    	$device = Device::where('macaddress', request()->input('macaddress'))->first();
+
     	$booking = Booking::create([
     		'pickup_lat' => request()->input('pickup_lat'),
     		'pickup_lng' => request()->input('pickup_lng'),
@@ -19,6 +22,7 @@ class BookingsController extends Controller
     		'dropoff_lng' => request()->input('dropoff_lng'),
     		'dropoff_address' => request()->input('dropoff_address'),
     		'user_id' => request()->user()->id,
+    		'device_id' => $device->id,
     	]);
 
     	$routes = Route::whereExists(function ($query) {
