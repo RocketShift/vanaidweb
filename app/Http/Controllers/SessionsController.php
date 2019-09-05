@@ -14,6 +14,7 @@ class SessionsController extends Controller
 	public function store(){
 		$user = request()->user();
 		$company = $user->companies()->first();
+		$device = Device::where('macaddress', request()->input('macaddress'))->first();
 
 		$existing_session = $user->sessions()->where('status', 'ongoing')->first();
 		if($existing_session){
@@ -25,6 +26,7 @@ class SessionsController extends Controller
 
 		$session = Session::create([
 			'user_id' => $user->id,
+			'device_id' => $device->id,
 			'vehicle_id' => request()->input('vehicle_id'),
 			'route_id' => request()->input('route_id'),
 			'company_id' => $company->id,
