@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Session;
+use App\Device;
 
 class SessionsController extends Controller
 {
